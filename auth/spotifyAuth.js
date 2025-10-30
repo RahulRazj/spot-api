@@ -1,4 +1,9 @@
 import axios from 'axios';
+import { 
+  SPOTIFY_AUTH_ENDPOINTS, 
+  CONTENT_TYPES, 
+  GRANT_TYPES 
+} from '../config/spotify.js';
 
 let accessTokenCache = {
   token: null,
@@ -17,9 +22,10 @@ export async function getAccessToken() {
     return accessTokenCache.token;
   }
 
-  const tokenUrl = 'https://accounts.spotify.com/api/token';
+  const tokenUrl = SPOTIFY_AUTH_ENDPOINTS.TOKEN;
+  
   const body = new URLSearchParams({
-    grant_type: 'refresh_token',
+    grant_type: GRANT_TYPES.REFRESH_TOKEN,
     refresh_token: process.env.SPOTIFY_REFRESH_TOKEN
   });
 
@@ -31,7 +37,7 @@ export async function getAccessToken() {
     const response = await axios.post(tokenUrl, body, {
       headers: {
         'Authorization': `Basic ${basicAuth}`,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': CONTENT_TYPES.FORM_URLENCODED
       }
     });
 

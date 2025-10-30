@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getAccessToken } from '../auth/spotifyAuth.js';
+import { SPOTIFY_API_ENDPOINTS, SPOTIFY_STATUS_CODES } from '../config/spotify.js';
 
 export default async function handler(req, res) {
   const allowedOrigin = process.env.ALLOWED_ORIGIN || '';
@@ -13,7 +14,7 @@ export default async function handler(req, res) {
     const token = await getAccessToken();
 
     try {
-      const response = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
+      const response = await axios.get(SPOTIFY_API_ENDPOINTS.CURRENTLY_PLAYING, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
 
       return res.status(200).json(song);
     } catch (spotifyError) {
-      if (spotifyError.response?.status === 204) {
+      if (spotifyError.response?.status === SPOTIFY_STATUS_CODES.NO_CONTENT) {
         // No song currently playing
         return res.status(200).json({ isPlaying: false });
       }
