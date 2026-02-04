@@ -28,7 +28,9 @@ export default async function handler(req, res) {
         artist: data.item?.artists?.map(a => a.name).join(', '),
         album: data.item?.album?.name,
         albumImageUrl: data.item?.album?.images?.[0]?.url,
-        songUrl: data.item?.external_urls?.spotify
+        songUrl: data.item?.external_urls?.spotify,
+        progressMs: data.progress_ms,
+        durationMs: data.item?.duration_ms
       };
 
       return res.status(200).json(song);
