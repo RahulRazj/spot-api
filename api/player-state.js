@@ -30,6 +30,7 @@ export default async function handler(req, res) {
 				albumImageUrl: data.item?.album?.images?.[0]?.url,
 				songUrl: data.item?.external_urls?.spotify,
 				deviceName: data.device?.name,
+                deviceType: data.device?.type,
 				progressMs: data.progress_ms,
 				durationMs: data.item?.duration_ms
 			};
