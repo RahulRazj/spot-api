@@ -6,6 +6,7 @@
 // Base URLs
 export const SPOTIFY_API_BASE = 'https://api.spotify.com/v1';
 export const SPOTIFY_ACCOUNTS_BASE = 'https://accounts.spotify.com/api';
+export const LRC_LIB_BASE = 'https://lrclib.net/api/';
 
 // Authentication endpoints
 export const SPOTIFY_AUTH_ENDPOINTS = {
@@ -21,6 +22,9 @@ export const SPOTIFY_API_ENDPOINTS = {
   // User's top items
   TOP_TRACKS: `${SPOTIFY_API_BASE}/me/top/tracks`,
   TOP_ARTISTS: `${SPOTIFY_API_BASE}/me/top/artists`,
+
+  // LrcLib endpoints
+  GET_LYRICS: `${LRC_LIB_BASE}/get`,
   
   // User profile
   USER_PROFILE: `${SPOTIFY_API_BASE}/me`,
