@@ -16,26 +16,26 @@ export default async function handler(req, res) {
 		return res.status(403).json({ error: 'Forbidden origin' });
 	}
 
-	// Check for ghost mode from Redis
-	const ghostModeEnabled = (await redis.get('ghost_mode_enabled')) || false;
-
-	if (ghostModeEnabled) {
-		const ghostState = {
-			isPlaying: false,
-			title: null,
-			artist: null,
-			album: null,
-			albumImageUrl: null,
-			songUrl: null,
-			deviceName: null,
-			deviceType: null,
-			progressMs: null,
-			durationMs: null
-		};
-		return res.status(200).json(ghostState);
-	}
-
 	try {
+		// Check for ghost mode from Redis
+		const ghostModeEnabled = (await redis.get('ghost_mode_enabled')) || false;
+
+		if (ghostModeEnabled) {
+			const ghostState = {
+				isPlaying: false,
+				title: null,
+				artist: null,
+				album: null,
+				albumImageUrl: null,
+				songUrl: null,
+				deviceName: null,
+				deviceType: null,
+				progressMs: null,
+				durationMs: null
+			};
+			return res.status(200).json(ghostState);
+		}
+
 		const token = await getAccessToken();
 
 		try {
